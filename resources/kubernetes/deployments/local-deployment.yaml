@@ -4,6 +4,9 @@ kind: Deployment
 metadata:
   name: php7-deployment
 spec:
+  selector:
+    matchLabels:
+      app: php7
   replicas: 1
   template:
     metadata:
@@ -21,6 +24,9 @@ kind: Deployment
 metadata:
   name: nginx-deployment
 spec:
+  selector:
+    matchLabels:
+      app: nginx
   replicas: 1
   template:
     metadata:
