@@ -18,42 +18,20 @@ How does it work?
     Starting local Kubernetes cluster...
     Kubectl is now configured to use the cluster.
     ```
-    **Optional:** Use xhyve driver for Docker instead of Virtualbox.
 
-    - Follow Minikube documentation on [installing the xhyve driver](https://github.com/kubernetes/minikube/blob/master/DRIVERS.md#xhyve-driver).
-    - Pass the `--vm-driver` argument to "Start Minikube".
-
-        ```bash
-        minikube start --vm-driver=xhyve
-        ```
 2. Create a K8S service:
 
     ```bash
     $ kubectl create -f resources/kubernetes/services/local-service.yaml
     service "local-service" created
     ```
+    
 3. Create a K8S deployment:
 
     ```bash
     $ kubectl create -f resources/kubernetes/deployments/local-deployment.yaml
     deployment "local-deployment" created
     ```
-    **Optional:** Mount local work into the container.
-
-    - Add the a volume info to `resources/kubernetes/deployments/local-deployment.yaml`:
-
-        ```diff
-                image: rabellamy/php7:0.1.0
-                ports:
-                - containerPort: 9000
-        +        volumeMounts:
-        +        - mountPath: /var/www/html
-        +          name: src
-        +      volumes:
-        +      - name: src
-        +        hostPath:
-        +          path: /PATH/TO/NGINX-PHP-7-K8S-Deployment/src
-        ```
 4. Get the URL for the NGINX service that will serve your PHP 7 app:
 
     ```bash
@@ -61,18 +39,4 @@ How does it work?
     ```
     Note, you may see this message until the pods are ready:
     > Waiting, endpoint for service is not ready yet...
-5. [Clean up when you're done](https://www.youtube.com/watch?v=PJhXVg2QisM):
 
-    ```bash
-    $ minikube delete
-    Deleting local Kubernetes cluster...
-    Machine deleted.
-    ````
-
-Why?
-====
-We wanted an example of an NGINX and PHP 7 template using the Kubernetes
- deployment object, and straight K8S configs, but to our knowledge none
- previously existed. Here you go!
-
- For a templatized solution, consider [Helm Charts](https://github.com/kubernetes/charts).
