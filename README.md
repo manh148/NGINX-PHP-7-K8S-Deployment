@@ -32,11 +32,11 @@ How does it work?
     $ kubectl create -f resources/kubernetes/deployments/local-deployment.yaml
     deployment "local-deployment" created
     ```
-4. Get the URL for the NGINX service that will serve your PHP 7 app:
+4. Get the URL for the NGINX service that will serve your nginx app:
 
     ```bash
     $ minikube service nginx-service --url
     ```
     Note, you may see this message until the pods are ready:
     > Waiting, endpoint for service is not ready yet...
-
+5. Use URL from step 4 on Chrome and enjoy 
