@@ -1,24 +1,4 @@
----
-apiVersion: apps/v1
-kind: Deployment
-metadata:
-  name: php7-deployment
-spec:
-  selector:
-    matchLabels:
-      app: php7
-  replicas: 1
-  template:
-    metadata:
-      labels:
-        app: php7
-    spec:
-      containers:
-      - name: php7
-        image: php:7.4-cli
-        ports:
-        - containerPort: 9000
----
+
 apiVersion: apps/v1
 kind: Deployment
 metadata:
